@@ -9,7 +9,19 @@ export const BarChart = ({ data, width, height }) => {
 
   const yScale = scaleBand()
     .domain(data)
-    .range([height - 2 * MARGIN, 0]);
+    .range([0, height - 2 * MARGIN]);
 
-  return <svg viewBox={`0 0 ${width} ${height}`}></svg>;
+  const rectangles = data.map((d) => (
+    <rect
+      key={d.city}
+      x={MARGIN}
+      y={yScale(d)}
+      height={yScale.bandwidth()}
+      width={xScale(d.sunshine)}
+      fill="pink"
+      stroke="white"
+    ></rect>
+  ));
+
+  return <svg viewBox={`0 0 ${width} ${height}`}>{rectangles}</svg>;
 };
