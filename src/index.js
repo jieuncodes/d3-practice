@@ -1,27 +1,17 @@
-import * as d3 from "d3";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
 
-const data = [...Array(50)].map(() => Math.floor(Math.random() * 100));
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
 
-function chart() {
-  const xScale = d3
-    .scaleLinear()
-    .domain([0, d3.max(data)])
-    .range([0, 300]);
-
-  const svg = d3.create("svg").attr("width", 300).attr("height", 100);
-
-  svg
-    .selectAll("rect")
-    .data(data)
-    .enter()
-    .append("rect")
-    .attr("x", 10)
-    .attr("y", (d, i) => i * 20)
-    .attr("width", (d) => xScale(d))
-    .attr("height", 8)
-    .attr("fill", "red");
-
-  return svg.node();
-}
-
-document.body.appendChild(chart());
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
